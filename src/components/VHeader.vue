@@ -18,7 +18,7 @@ export default {
       // build todoObj from user input
       // id can be Math.random / Data.now() /--> uuid -> nanoid
       const todoObj = { id: nanoid(), title: e.target.value, done: false }
-      console.log(todoObj);
+      console.log(todoObj)
     },
   },
 }
