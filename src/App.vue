@@ -3,8 +3,8 @@
   <div id="root">
     <div class="todo-container">
       <div class="todo-wrap">
-        <VHeader></VHeader>
-        <VList></VList>
+        <VHeader :addTodo="addTodo"></VHeader>
+        <VList :todos="todos"></VList>
         <VFooter></VFooter>
       </div>
     </div>
@@ -22,6 +22,20 @@ export default {
     VHeader,
     VFooter,
     VList,
+  },
+  data() {
+    return {
+      todos: [
+        { id: '001', title: '抽烟', done: true },
+        { id: '002', title: '喝酒', done: false },
+        { id: '003', title: '开车', done: true },
+      ],
+    }
+  },
+  methods: {
+    addTodo(x) {
+      this.todos.unshift(x) // -->重新解析模板
+    },
   },
 }
 </script>
@@ -69,10 +83,4 @@ body {
   border: 1px solid #ddd;
   border-radius: 5px;
 }
-
-
-
-
-
-
 </style>

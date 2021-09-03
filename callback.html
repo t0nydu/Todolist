@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    {  
+      let a1 = 111
+      function fn(x){
+        console.log("x:",x);
+        a1 +=x
+        console.log(a1);
+      }
+    }
+    {
+      let a1 = 222 
+      console.log(a1);
+      fn(a1)
+      // a1 += a1
+      console.log(a1);
+
+    }
+  </script>
+</body>
+</html>

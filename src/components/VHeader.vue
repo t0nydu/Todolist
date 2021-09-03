@@ -13,12 +13,18 @@ export default {
       title: '',
     }
   },
+  props:["addTodo"],
+
   methods: {
     add(e) {
+      
       // build todoObj from user input
       // id can be Math.random / Data.now() /--> uuid -> nanoid
+      if(e.target.value.trim() === '') return 
       const todoObj = { id: nanoid(), title: e.target.value, done: false }
       console.log(todoObj);
+      this.addTodo(todoObj)
+      e.target.value = ''
     },
   },
 }
