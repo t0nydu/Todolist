@@ -1,6 +1,6 @@
 <template>
   <ul class="todo-main">
-    <VItem></VItem>
+   <VItem v-for="(todoObj) in todos" :key="todoObj.id" :qwe="todoObj"></VItem>
   </ul>
 </template>
 
@@ -9,6 +9,15 @@ import VItem from './VItem'
 export default {
   name: 'VList',
   components: { VItem },
+  data() {
+    return {
+      todos: [
+        { id: '001', title: '抽烟', done: true },
+        { id: '002', title: '喝酒', done: false },
+        { id: '003', title: '开车', done: true },
+      ],
+    }
+  },
 }
 </script>
 
