@@ -1,10 +1,10 @@
 <template>
   <li>
     <label>
-      <input type="checkbox" :checked="qwe.done"/>
+      <input type="checkbox" :checked="qwe.done" @click="handleCheck(qwe.id)"/>
       <span>{{qwe.title}}</span>
     </label>
-    <button class="btn btn-danger" style="display:none">删除</button>
+    <button class="btn btn-danger" @click="handelDelete(qwe.id)">删除</button>
   </li>
 </template>
 
@@ -12,8 +12,17 @@
 export default {
   name: 'VItem666',
   // declear receive todo obj
-  props:["qwe"],
-
+  props:["qwe", "changeChecked", "deleteTodo"],
+  methods: {
+    handleCheck(id) {
+      this.changeChecked(id)
+    },
+    handelDelete(id){
+      if(confirm("Are you sure you want to delete")){
+        this.deleteTodo(id)
+      }
+    },
+  }
 }
 </script>
 
@@ -51,5 +60,11 @@ li:before {
 
 li:last-child {
   border-bottom: none;
+}
+li:hover{
+  background-color: #ddd;
+}
+li:hover button{
+    display: block;
 }
 </style>

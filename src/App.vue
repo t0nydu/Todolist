@@ -4,8 +4,8 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <VHeader :addTodo="addTodo"></VHeader>
-        <VList :todos="todos"></VList>
-        <VFooter></VFooter>
+        <VList :todos="todos" :changeChecked="changeChecked" :deleteTodo="deleteTodo"></VList>
+        <VFooter :todos="todos" :checkAll="checkAll" :clearAll="clearAll"></VFooter>
       </div>
     </div>
   </div>
@@ -35,6 +35,33 @@ export default {
   methods: {
     addTodo(x) {
       this.todos.unshift(x) // -->重新解析模板
+    },
+    changeChecked(id) {
+      this.todos.forEach((item) => {
+        if (item.id === id) {
+          item.done = !item.done
+        }
+      })
+    },
+    deleteTodo(id) {
+      this.todos.forEach((item, index) => {
+        if (item.id === id) {
+          this.todos.splice(index, 1)
+        }
+      })
+    },
+    checkAll(status) {
+      this.todos.forEach((item) => {
+        item.done = status
+      })
+    },
+    clearAll() {
+      this.todos = this.todos.filter((item) => !item.done)
+      //  this.todos.forEach((item, index) => {
+      //     if (item.done) {
+      //       this.todos.splice(index, 1)
+      //     }
+      //   })
     },
   },
 }

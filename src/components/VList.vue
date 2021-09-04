@@ -1,6 +1,6 @@
 <template>
   <ul class="todo-main">
-   <VItem v-for="(todoObj) in todos" :key="todoObj.id" :qwe="todoObj"></VItem>
+    <VItem v-for="todoObj in todos" :key="todoObj.id" :qwe="todoObj" :changeChecked="changeChecked" :deleteTodo="deleteTodo"></VItem>
   </ul>
 </template>
 
@@ -9,7 +9,7 @@ import VItem from './VItem'
 export default {
   name: 'VList',
   components: { VItem },
-  props:["todos"]
+  props: ['todos', 'changeChecked', 'deleteTodo'],
 }
 </script>
 
