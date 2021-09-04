@@ -14,11 +14,12 @@
 <script>
 export default {
   name: 'VFooter',
-  props: ['todos', 'checkAll', 'clearAll'],
+  props: ['todos'],
   methods: {
     _clearAll() {
       if (confirm('确定要清空所有完成的吗')) {
-        this.clearAll()
+        // this.clearAll()
+        this.$emit("clearAll")
       }
     },
   },
@@ -35,7 +36,8 @@ export default {
         return this.doneTotal === this.total && this.total > 0
       },
       set(value) {
-        this.checkAll(value)
+        // this.checkAll(value)
+        this.$emit('checkAll', value)
       },
     },
   },

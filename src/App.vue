@@ -5,7 +5,7 @@
       <div class="todo-wrap">
         <VHeader :addTodo="addTodo"></VHeader>
         <VList :todos="todos" :changeChecked="changeChecked" :deleteTodo="deleteTodo"></VList>
-        <VFooter :todos="todos" :checkAll="checkAll" :clearAll="clearAll"></VFooter>
+        <VFooter :todos="todos" @checkAll="checkAll" @clearAll="clearAll"></VFooter>
       </div>
     </div>
   </div>
