@@ -4,7 +4,7 @@
     <div class="todo-container">
       <div class="todo-wrap">
         <VHeader :addTodo="addTodo"></VHeader>
-        <VList :todos="todos" :changeChecked="changeChecked" :deleteTodo="deleteTodo"></VList>
+        <VList :todos="todos"></VList>
         <VFooter :todos="todos" @checkAll="checkAll" @clearAll="clearAll"></VFooter>
       </div>
     </div>
@@ -25,26 +25,12 @@ export default {
   },
   data() {
     return {
-      todos:JSON.parse(localStorage.getItem("todos")) || []
+      todos: JSON.parse(localStorage.getItem('todos')) || [],
     }
   },
   methods: {
     addTodo(x) {
       this.todos.unshift(x) // -->重新解析模板
-    },
-    changeChecked(id) {
-      this.todos.forEach((item) => {
-        if (item.id === id) {
-          item.done = !item.done
-        }
-      })
-    },
-    deleteTodo(id) {
-      this.todos.forEach((item, index) => {
-        if (item.id === id) {
-          this.todos.splice(index, 1)
-        }
-      })
     },
     checkAll(status) {
       this.todos.forEach((item) => {
@@ -60,15 +46,34 @@ export default {
       //   })
     },
   },
-  watch:{
-    todos:{
+  watch: {
+    todos: {
       deep: true,
-      handler(value){
-        
-        localStorage.setItem("todos", JSON.stringify(value))
-      }
-    }
-  }
+      handler(value) {
+        localStorage.setItem('todos', JSON.stringify(value))
+      },
+    },
+  },
+  mounted() {
+    this.$bus.$on('changeChecked', (id) => {
+      this.todos.forEach((item) => {
+        if (item.id === id) {
+          item.done = !item.done
+        }
+      })
+    })
+    this.$bus.$on('deleteTodo', (id) => {
+      this.todos.forEach((item, index) => {
+        if (item.id === id) {
+          this.todos.splice(index, 1)
+        }
+      })
+    })
+  },
+  beforeDestroy() {
+    this.$bus.$off('changeChecked')
+    this.$bus.$off('deleteTodo')
+  },
 }
 </script>
 

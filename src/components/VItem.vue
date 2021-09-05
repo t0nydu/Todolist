@@ -1,8 +1,8 @@
 <template>
   <li>
     <label>
-      <input type="checkbox" :checked="qwe.done" @click="handleCheck(qwe.id)"/>
-      <span>{{qwe.title}}</span>
+      <input type="checkbox" :checked="qwe.done" @click="handleCheck(qwe.id)" />
+      <span>{{ qwe.title }}</span>
     </label>
     <button class="btn btn-danger" @click="handelDelete(qwe.id)">删除</button>
   </li>
@@ -12,17 +12,17 @@
 export default {
   name: 'VItem666',
   // declear receive todo obj
-  props:["qwe", "changeChecked", "deleteTodo"],
+  props: ['qwe', 'deleteTodo'],
   methods: {
     handleCheck(id) {
-      this.changeChecked(id)
+      this.$bus.$emit('changeChecked', id)
     },
-    handelDelete(id){
-      if(confirm("Are you sure you want to delete")){
-        this.deleteTodo(id)
+    handelDelete(id) {
+      if (confirm('Are you sure you want to delete')) {
+        this.$bus.$emit('deleteTodo', id)
       }
     },
-  }
+  },
 }
 </script>
 
@@ -61,10 +61,10 @@ li:before {
 li:last-child {
   border-bottom: none;
 }
-li:hover{
+li:hover {
   background-color: #ddd;
 }
-li:hover button{
-    display: block;
+li:hover button {
+  display: block;
 }
 </style>
