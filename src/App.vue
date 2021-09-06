@@ -110,6 +110,12 @@ body {
   background-color: #da4f49;
   border: 1px solid #bd362f;
 }
+.btn-edit{
+  color: #fff;
+  background-color: skyblue;
+  border: 1px solid rgb(9, 178, 245);
+  margin-right: 6px;
+}
 
 .btn-danger:hover {
   color: #fff;

@@ -2,9 +2,11 @@
   <li>
     <label>
       <input type="checkbox" :checked="qwe.done" @click="handleCheck(qwe.id)" />
-      <span>{{ qwe.title }}</span>
+      <span v-show="!this.isEdit">{{ qwe.title }}</span>
     </label>
+    <input ref="inputTitle" type="text" v-show="this.isEdit" @blur="doneEdit($event)" @keyup.enter="doneEdit" :value="qwe.title" />
     <button class="btn btn-danger" @click="handelDelete(qwe.id)">删除</button>
+    <button class="btn btn-edit" v-show="!this.isEdit" @click="handelEdit">编辑</button>
   </li>
 </template>
 
@@ -12,6 +14,11 @@
 import pubsub from 'pubsub-js'
 export default {
   name: 'VItem666',
+  data() {
+    return {
+      isEdit: false,
+    }
+  },
   // declear receive todo obj
   props: ['qwe', 'deleteTodo'],
   methods: {
@@ -20,6 +27,22 @@ export default {
     },
     handelDelete(id) {
       if (confirm('Are you sure you want to delete')) pubsub.publish('deleteTodo', id)
+    },
+    handelEdit() {
+      this.isEdit = !this.isEdit
+      // setTimeout(() => {
+      //   this.$el.querySelector('li>input').focus()
+      // }, 20)
+      // dom更新完毕，调用函数
+      this.$nextTick(()=>{
+        this.$refs.inputTitle.focus()
+      })
+    },
+    doneEdit(e) {
+      this.isEdit = false
+      const userInput = e.target.value //this.$el.querySelector('li>input').value
+      if (userInput.trim() === '') return alert('输入不能为空')
+      this.qwe.title = userInput
     },
   },
 }
