@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import pubsub from 'pubsub-js'
 export default {
   name: 'VItem666',
   // declear receive todo obj
@@ -18,9 +19,7 @@ export default {
       this.$bus.$emit('changeChecked', id)
     },
     handelDelete(id) {
-      if (confirm('Are you sure you want to delete')) {
-        this.$bus.$emit('deleteTodo', id)
-      }
+      if (confirm('Are you sure you want to delete')) pubsub.publish('deleteTodo', id)
     },
   },
 }

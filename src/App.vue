@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import pubsub from 'pubsub-js'
 import VHeader from './components/VHeader'
 import VFooter from './components/VFooter'
 import VList from './components/VList'
@@ -62,17 +63,25 @@ export default {
         }
       })
     })
-    this.$bus.$on('deleteTodo', (id) => {
+    this.pubId = pubsub.subscribe('deleteTodo', (_, id) => {
       this.todos.forEach((item, index) => {
         if (item.id === id) {
           this.todos.splice(index, 1)
         }
       })
     })
+    // this.$bus.$on('deleteTodo', (id) => {
+    //   this.todos.forEach((item, index) => {
+    //     if (item.id === id) {
+    //       this.todos.splice(index, 1)
+    //     }
+    //   })
+    // })
   },
   beforeDestroy() {
     this.$bus.$off('changeChecked')
-    this.$bus.$off('deleteTodo')
+    pubsub.unsubscribe(this.pubId)
+    // this.$bus.$off('deleteTodo')
   },
 }
 </script>
