@@ -11,6 +11,7 @@
 </template>
 
 <script>
+
 import pubsub from 'pubsub-js'
 export default {
   name: 'VItem666',
@@ -34,7 +35,7 @@ export default {
       //   this.$el.querySelector('li>input').focus()
       // }, 20)
       // dom更新完毕，调用函数
-      this.$nextTick(()=>{
+      this.$nextTick(() => {
         this.$refs.inputTitle.focus()
       })
     },

@@ -1,10 +1,13 @@
 <template>
   <ul class="todo-main">
-    <VItem v-for="todoObj in todos" :key="todoObj.id" :qwe="todoObj"></VItem>
+    <transition-group appear name="animate__animated animate__bounce" enter-active-class="animate__bounceInLeft" leave-active-class="animate__backOutUp">
+      <VItem v-for="todoObj in todos" :key="todoObj.id" :qwe="todoObj"></VItem>
+    </transition-group>
   </ul>
 </template>
 
 <script>
+import 'animate.css'
 import VItem from './VItem'
 export default {
   name: 'VList',
